@@ -31,7 +31,7 @@ def create_model_form_rgb(upscale_factor = 4):
 
     model.compile(optimizer='adam', loss='mse')
 
-    model.summary()
+    # model.summary()
     return model
 
 def create_model_form_yuv(upscale_factor = 4):
@@ -51,7 +51,7 @@ def create_model_form_yuv(upscale_factor = 4):
 
     model.compile(optimizer='adam', loss='mse')
 
-    model.summary()
+    # model.summary()
     return model
 
 def load_model(channels):
@@ -163,5 +163,55 @@ def pred_test(test_idx, channel, model):
     plt.imshow(y1_test)
     plt.show()
 
+def resized_output_psnr_ssim(test_idx, channel, model):
+    x1_test, x1_test_resized, y_pred, y1_test = Xy_input_output_split(
+        test_idx, channel, model
+    )
+    y_pred = (y_pred * 255).astype(np.uint8)
 
+    resized_psnr = tf.image.psnr(y1_test, x1_test_resized, max_val=255)
+    pred_psnr = tf.image.psnr(y1_test, y_pred, max_val=255)
 
+    resized_ssim = tf.image.ssim(y1_test, x1_test_resized, max_val=255)
+    pred_ssim = tf.image.ssim(y1_test, y_pred, max_val=255)
+
+    return resized_psnr, pred_psnr, resized_ssim, pred_ssim
+
+def plot_resized_pred_truth_psnr_ssim(test_idx, channel, model):
+    x1_test, x1_test_resized, y_pred, y1_test = Xy_input_output_split(
+        test_idx, channel, model
+    )
+    y_pred = (y_pred * 255).astype(np.uint8)
+
+    resized_psnr = tf.image.psnr(y1_test, x1_test_resized, max_val=255)
+    pred_psnr = tf.image.psnr(y1_test, y_pred, max_val=255)
+
+    resized_ssim = tf.image.ssim(y1_test, x1_test_resized, max_val=255)
+    pred_ssim = tf.image.ssim(y1_test, y_pred, max_val=255)
+
+    fig = plt.figure()
+    fig.suptitle(channel + " results")
+    plt.subplot(2, 3, 1)
+    plt.title('input')
+    plt.imshow(x1_test)
+    plt.subplot(2, 3, 2)
+    plt.title('resized')
+    plt.imshow(x1_test_resized)
+    plt.subplot(2, 3, 3)
+    plt.title('output')
+    plt.imshow(y_pred)
+    plt.subplot(2, 3, 4)
+    plt.title('groundtruth')
+    plt.imshow(y1_test)
+    plt.subplot(2, 3, 5)
+    plt.title('PSNR with Groundtruth')
+    plt.bar(
+        ['Resized', 'Predicted'],
+        [resized_psnr, pred_psnr])
+    plt.subplot(2, 3, 6)
+    plt.title('SSIM with Groundtruth')
+    plt.bar(
+        ['Resized', 'Predicted'],
+        [resized_ssim, pred_ssim]
+    )
+    plt.show()

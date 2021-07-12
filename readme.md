@@ -28,8 +28,8 @@ Subpixel.py 사용시 버전 문제로 에러가 발생하여 Subpixel.py를 사
 |---|---|
 |![RGBSUMMARY](rgb모델summary.PNG)|![YUVSUMMARY](yuv모델summary.PNG)|
 
-
-<br><br>
+   
+## Model  학습 후 test
 
 * RGB 모델 학습 결과
 ![rgb result](RGB%20results%20test_idx_21.png)   
@@ -41,3 +41,24 @@ Subpixel.py 사용시 버전 문제로 에러가 발생하여 Subpixel.py를 사
 - output: 학습된 모델로 초해상화 한 이미지
 - groundtruth: 고해상도 이미지
 
+<br>
+
+## PSNR 비교
+| resized | RGB | YUV |
+| --- | --- | --- |
+| 24.7295513 | 29.5011406 | 29.0960197 |
+   
+## SSIM 비교
+| resized | RGB | YUV |
+| --- | --- | --- |
+| 0.780828834 | 0.891130626 | 0.878575146 |
+
+<br><br>
+
+Test Image 10개 평균 PSNR SSIM 그래프
+![graph](aver_PSNR_SSIM.png)   
+   
+<br>
+
+# 이미지 왜곡 내림차순 정렬
+## 저해상도 -> resize -> YUV 초해상화 -> RGB 초해상화 -> 고해상도
