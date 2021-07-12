@@ -1,8 +1,8 @@
-
-#%%
 from trainmodel import *
 
-trained_model = load_model()
+colors = ["RGB", "YUV"]
 
-pred_test(21, trained_model)
+for color in colors:
+    trained_model = load_model(color)
+    pred_test(21, color, trained_model)
 

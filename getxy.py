@@ -1,5 +1,6 @@
 import os, glob
 from DataGenerator import DataGenerator
+from YUVDataGenerator import DataGeneratorYUV
 
 base_path = 'E:/processed'
 
@@ -18,4 +19,13 @@ def get_xytest():
 
     return x_test_list, y_test_list
 
+def get_trainval_yuv():
+    x_train_list = sorted(glob.glob(os.path.join(base_path, 'x_train', '*.npy')))
+    x_val_list = sorted(glob.glob(os.path.join(base_path, 'x_val', '*.npy')))
+
+    train_gen = DataGeneratorYUV(list_IDs=x_train_list, labels=None, batch_size=16, dim=(44,44), n_channels=1, n_classes=None, shuffle=True)
+    val_gen = DataGeneratorYUV(list_IDs=x_val_list, labels=None, batch_size=16, dim=(44,44), n_channels=1, n_classes=None, shuffle=False)
+
+    train_gen.__getitem__(5)
+    return train_gen, val_gen
 
