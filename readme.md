@@ -4,9 +4,7 @@ Super Resolution
 -------------------------
 #### : 저해상도 이미지를 고해상도로 복원하는 과정
 
-> [출처 유튜브 링크 - 빵형의 개발도상국 채널](https://www.youtube.com/watch?v=VxRCku4Bkgg)
-<br>
-
+> [출처 유튜브 링크 - 빵형의 개발도상국 채널](https://www.youtube.com/watch?v=VxRCku4Bkgg)   
 [이미지 링크 - Dataset - CelebA](https://www.kaggle.com/jessicali9530/celeba-dataset)
 ![super resolution youtube thumbnail](https://i.ytimg.com/vi/VxRCku4Bkgg/maxresdefault.jpg?raw=true)
 DataGenerator.py를 이용해 각각의 data set을 (input, output)의 형태로 저장
