@@ -31,9 +31,11 @@ Subpixel.py 사용시 버전 문제로 에러가 발생하여 Subpixel.py를 사
 
 <br><br>
 
-| RGB 모델 학습 결과 | YUV 모델 학습 결과 |
-|---|---|
-| ![rgb result](RGB%20results%20test_idx_21.png) | ![yuv result](YUV%20results%20test_idx_21.png) |
+* RGB 모델 학습 결과
+![rgb result](RGB%20results%20test_idx_21.png)   
+* YUV 모델 학습 결과
+![yuv result](YUV%20results%20test_idx_21.png)   
+
 - input: 저해상도 이미지
 - resized: 단순 해상도 확장 이미지
 - output: 학습된 모델로 초해상화 한 이미지
